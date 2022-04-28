@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "WXDBDecrypt.NET": {
+      "commandName": "Project",
+      "commandLineArgs": "D:\\EncryptedDB\\MSG0.db"
+    }
+  }
+}
