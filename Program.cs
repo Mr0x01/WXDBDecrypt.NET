@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -63,7 +64,7 @@ namespace WXDBDecrypt.NET
             Console.WriteLine("开始解密...");
             var hmac_sha1 = HMAC.Create("HMACSHA1");
             hmac_sha1.Key = hmac_key;
-            ConcurrentQueue<byte> decrypted_file_bytes = new ConcurrentQueue<byte>();
+            List<byte> decrypted_file_bytes = new List<byte>();
             while (page_no < db_file_bytes.Length / DEFAULT_PAGESIZE)
             {
                 byte[] decryped_page_bytes = new byte[DEFAULT_PAGESIZE];
@@ -100,7 +101,7 @@ namespace WXDBDecrypt.NET
                 offset = 0;
                 foreach (var item in decryped_page_bytes)
                 {
-                    decrypted_file_bytes.Enqueue(item);
+                    decrypted_file_bytes.Add(item);
                 }
             }
             return decrypted_file_bytes.ToArray();
